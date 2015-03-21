@@ -6,7 +6,7 @@ $(function() {
 
   function init() {
 
-    activateTabbedPanels();
+    // activateTabbedPanels();
 
     activateSelectableRows();
 
