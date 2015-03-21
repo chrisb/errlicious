@@ -5,6 +5,7 @@ module ProblemsHelper
 
   def truncated_problem_message(problem)
     unless (msg = problem.message).blank?
+      msg.squish!
       # Truncate & insert invisible chars so that firefox can emulate 'word-wrap: break-word' CSS rule
       truncate(msg, :length => 300, :escape => false).scan(/.{1,5}/).map { |s| h(s) }.join("&#8203;").html_safe
     end
@@ -29,4 +30,3 @@ module ProblemsHelper
     "#{url}/avatar/#{email_hash}?#{params.to_query}"
   end
 end
-
