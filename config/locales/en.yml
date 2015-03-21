@@ -17,11 +17,13 @@ en:
 
   layouts:
     application:
-      title: 'Errbit'
-      errbit: 'Errbit'
-      powered_html: "Powered by %{link} : the open source error catcher."
+      title: 'Errlicious'
+      errbit: 'Errlicious'
+      powered_html: "Powered by %{link} : an open source error catcher."
 
   shared:
+    header:
+        errbit: 'Errlicious'
     navigation:
       apps: 'Apps'
       errors: 'Errors'
@@ -106,7 +108,7 @@ en:
       all_users_notified: "All users will be notified when something happens."
       api_key: "API Key:"
       are_you_sure: 'Are you sure?'
-      atom_title: "Errbit notices for %{name} at %{host}"
+      atom_title: "Errlicious notices for %{name} at %{host}"
       deploy_count: "Deploy Count:"
       edit: edit
       environment: Environment
@@ -139,4 +141,3 @@ en:
       cancel: 'cancel'
       seriously: 'Seriously?'
       update: 'Update App'
-
