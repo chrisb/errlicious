@@ -1,4 +1,13 @@
 module ApplicationHelper
+
+  def should_show_app_column?
+    controller_name == 'problems' && action_name == 'index'
+  end
+
+  def should_show_deploy_column?
+    defined?(@app) ? @app.deploys.any? : Deploy.count > 0
+  end
+
   def message_graph(problem)
     create_percentage_table_for(problem.messages)
   end
@@ -79,4 +88,3 @@ module ApplicationHelper
     end
 
 end
-

@@ -8,9 +8,9 @@
   - else
     = link_to 'show resolved', problems_path(:all_errs => true), :class => 'button'
 
-%section
+section
   = render 'problems/search', :all_errs => @all_errs, :app_id => nil
-%br
-%section
+br
+section
   #problem_table.problem_table
     = render 'problems/table'

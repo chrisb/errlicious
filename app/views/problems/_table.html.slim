@@ -1,0 +1,30 @@
+- any_issue_links = problems.any?{|e| e.issue_link.present? && e.issue_link != 'pending' }
+
+=form_tag do
+  = paginate problems
+  = render 'problems/batch_actions'
+  .table-responsive
+    table.errs.selectable.table.table-striped.table-condensed
+      thead
+        tr
+          th= check_box_tag "toggle_problems_checkboxes"
+          - if should_show_app_column?
+            th= link_for_sort "App"
+          th Env
+          th.text-right Where
+          th= link_for_sort "What".html_safe, "message"
+          th= link_for_sort "Latest", "last_notice_at"
+          - if should_show_deploy_column?
+            th= link_for_sort "Deploy", "last_deploy_at"
+          th= link_for_sort "Count"
+          - if any_issue_links
+            th Issue
+          th Resolve
+      tbody
+        = render partial: 'problems/problem', collection: problems, locals: { any_issue_links: any_issue_links }
+        - if problems.none?
+          tr
+            td colspan=((any_issue_links ? 8 : 7))
+              em No errs here
+  = paginate problems
+  = render 'problems/batch_actions'

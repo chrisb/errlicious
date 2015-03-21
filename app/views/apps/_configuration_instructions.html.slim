@@ -1,6 +1,6 @@
-%pre
-  %code
-    :preserve
+pre
+  code
+    preserve:
       # Require the airbrake gem in your App.
       # ---------------------------------------------
       #
@@ -13,9 +13,9 @@
       # Then add the following to config/initializers/errbit.rb
       # -------------------------------------------------------
 
-      Airbrake.configure do |config|
-        config.api_key = '#{app.api_key}'
-        config.host    = '#{request.host}'
-        config.port    = #{request.port}
-        config.secure  = config.port == 443
-      end
+      | Airbrake.configure do |config|
+        | config.api_key = '#{app.api_key}'
+        | config.host    = '#{request.host}'
+        | config.port    = #{request.port}
+        | config.secure  = config.port == 443
+      | end

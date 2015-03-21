@@ -1,0 +1,22 @@
+br
+
+.row
+  .col-md-2
+    .panel.panel-danger.text-center
+      .panel-heading= t '.errors_caught'
+      h3.panel-body= app.problems.count
+
+  .col-md-2
+    .panel.panel-success.text-center
+      .panel-heading= t '.deploy_count'
+      h3.panel-body= app.deploys.count
+
+  .col-md-2
+    .panel.panel-default.text-center
+      .panel-heading Latest App Version
+      h3.panel-body= app.current_app_version.present? ? app.current_app_version : content_tag(:span,'Not Set',class:'text-muted')
+
+/ .col-md-3
+/   h1
+/     =t('.api_key')
+/     small= app.api_key

@@ -1,0 +1,23 @@
+doctype html
+html
+  head= render 'shared/head'
+  body[id=controller.controller_name class=controller.action_name]
+    = render 'shared/header'
+    .container-fluid
+      #content-title[class=yield(:title_css_class).to_s style=yield(:title_style)]
+        h1= yield :title
+        .meta= yield :meta
+        - if (action_bar = yield(:action_bar)).present?
+          #action-bar
+            = action_bar
+      #content
+        = render 'shared/flash_messages'
+        = yield
+      - if content_for?(:comments)
+        #content-comments
+          = yield :comments
+    #footer
+      = t('.powered_html', :link => link_to(t('.errbit'), 'http://github.com/errbit/errbit', :target => '_blank'))
+      br
+      = Errbit::Version.to_s
+    = yield :scripts

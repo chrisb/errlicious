@@ -1,0 +1,32 @@
+tr class=(problem.resolved? ? 'resolved' : 'unresolved')
+  td.select
+    = check_box_tag "problems[]", problem.id, selected_problems.member?(problem.id.to_s)
+  - if should_show_app_column?
+    td.app[style='white-space: nowrap;']
+      = link_to problem.app.name, app_path(problem.app)
+  td.environment
+    span.environment= link_to problem.environment, current_page?(controller:'problems') ? problems_path(environment: problem.environment) : app_path(problem.app, environment: problem.environment)
+  td.where.text-right[style="font-family: monospace; font-size: 0.8em; font-weight:bold;"]= problem.where
+  td.message
+    small= link_to truncated_problem_message(problem), app_problem_path(problem.app, problem), style: 'overflow: ellipsis; white-space: pre-wrap; word-wrap: break-word;'
+    - if problem.comments_count > 0
+      - comment = problem.comments.last
+      br
+      .inline_comment
+        - if comment.user
+          em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
+        em= truncate(comment.body, :length => 100, :separator => ' ')
+  td.latest
+    small #{time_ago_in_words problem.last_notice_at}  ago
+  - if should_show_deploy_column?
+    td.deploy
+      small= problem.last_deploy_at ? problem.last_deploy_at.to_s(:micro) : 'n/a'
+  td.count.text-center
+    = link_to problem.notices_count, app_problem_path(problem.app, problem), class: 'label label-danger'
+  - if any_issue_links
+    td.issue_link
+      - if problem.app.issue_tracker_configured? && problem.issue_link.present? && problem.issue_link != 'pending'
+        = link_to image_tag("#{problem.issue_type}_goto.png"), problem.issue_link, :target => "_blank"
+  td.resolve
+    - if problem.unresolved?
+      = link_to "#{icon :ok} Resolve".html_safe, resolve_app_problem_path(problem.app, problem), title: 'Resolve', method: :put, data: { confirm: problem_confirm('resolve_one') }, class: 'btn btn-xs btn-success resolve'

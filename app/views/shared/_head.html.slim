@@ -1,0 +1,10 @@
+title
+  = t('layouts.application.title')
+  | &mdash;
+  = yield(:page_title).present? ? yield(:page_title) : yield(:title)
+meta content="text/html; charset=utf-8" http-equiv="content-type" /
+= favicon_link_tag
+= csrf_meta_tag
+= stylesheet_link_tag :application
+= javascript_include_tag :application
+= yield :head

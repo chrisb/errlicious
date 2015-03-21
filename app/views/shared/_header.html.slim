@@ -1,0 +1,50 @@
+nav.navbar.navbar-inverse.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to t('.errbit'), root_path, id: 'site-name', class: 'navbar-brand'
+    #navbar.navbar-collapse.collapse
+      ul.nav.navbar-nav
+        - if user_signed_in?
+          li[class=active_if_here(:apps)]= link_to t('.apps'), apps_path
+          li[class=active_if_here(:problems)]= link_to t('.errors'), problems_path
+          - if current_user.admin?
+            li[class=active_if_here(:users)]= link_to t('.users'), users_path
+        / li.active
+        /   a href="#"  Home
+        / li
+        /   a href="#about"  About
+        / li
+        /   a href="#contact"  Contact
+        / li.dropdown
+        /   a.dropdown-toggle aria-expanded="false" data-toggle="dropdown" href="#" role="button"
+        /     | Dropdown
+        /     span.caret
+        /   ul.dropdown-menu role="menu"
+        /     li
+        /       a href="#"  Action
+        /     li
+        /       a href="#"  Another action
+        /     li
+        /       a href="#"  Something else here
+        /     li.divider
+        /     li.dropdown-header Nav header
+        /     li
+        /       a href="#"  Separated link
+        /     li
+        /       a href="#"  One more separated link
+      ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          li= link_to t('.edit_profile'), edit_user_path(current_user), :id => 'edit-profile'
+          li= link_to t('.sign_out'), destroy_session_path(:user), :id => 'sign-out', :method => :delete
+
+
+/ #header
+/   div
+/
+/     = render 'shared/navigation' if current_user
+/     = render 'shared/session'
