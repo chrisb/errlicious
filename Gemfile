@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-RAILS_VERSION = '~> 4.1.8'
+RAILS_VERSION = '~> 4.2'
 
 send :ruby, ENV['GEMFILE_RUBY_VERSION'] if ENV['GEMFILE_RUBY_VERSION']
 
@@ -16,6 +16,11 @@ gem 'devise'
 gem 'haml'
 gem 'htmlentities'
 gem 'rack-ssl', :require => 'rack/ssl'   # force SSL
+
+gem 'slim-rails'
+gem 'font-awesome-sass'
+gem 'bootstrap-sass'
+gem 'puma'
 
 gem 'useragent'
 gem 'decent_exposure'
